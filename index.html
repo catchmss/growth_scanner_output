@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Earnings Lookup</title>
+<style>
+  body { font-family: -apple-system, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  h1 { font-size: 1.3rem; }
+  #controls { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+  input { font-size: 1rem; padding: 0.4rem 0.6rem; text-transform: uppercase; width: 8rem; }
+  button { font-size: 1rem; padding: 0.4rem 1rem; cursor: pointer; }
+  table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+  th, td { border-bottom: 1px solid #ddd; padding: 0.4rem 0.6rem; text-align: right; font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: #555; font-weight: 600; font-size: 0.85rem; }
+  .neg { color: #b3261e; }
+  .pos { color: #1e8e3e; }
+  #status { color: #555; margin-top: 0.5rem; }
+  #earnings { margin-top: 0.5rem; font-size: 0.95rem; }
+  #updated { color: #999; font-size: 0.8rem; margin-top: 2rem; }
+  section { margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+<h1>Earnings Lookup</h1>
+<div id="controls">
+  <input id="ticker" placeholder="TICKER" autofocus>
+  <button id="go">Look up</button>
+</div>
+<div id="status"></div>
+<div id="earnings"></div>
+<section id="eps"></section>
+<section id="revenue"></section>
+<div id="updated"></div>
+<script>
+function fmt(v, kind) {
+  if (v === null || v === undefined) return '<span style="color:#999">n/a</span>';
+  if (kind === 'pct') {
+    const cls = v >= 0 ? 'pos' : 'neg';
+    return '<span class="' + cls + '">' + v.toFixed(1) + '%</span>';
+  }
+  if (kind === 'eps') return '$' + v.toFixed(2);
+  if (kind === 'revenue') {
+    const abs = Math.abs(v);
+    if (abs >= 1e9) return '$' + (v / 1e9).toFixed(2) + 'B';
+    if (abs >= 1e6) return '$' + (v / 1e6).toFixed(1) + 'M';
+    return '$' + v.toLocaleString();
+  }
+  return v;
+}
+
+function table(title, rows, kind) {
+  if (!rows.length) return '<h2>' + title + '</h2><p style="color:#999">No SEC data found.</p>';
+  const body = rows.slice().reverse().map(r =>
+    '<tr><td>' + r.quarter_end + '</td><td>' + fmt(r.value, kind) +
+    '</td><td>' + fmt(r.yoy_pct, 'pct') + '</td><td>' + fmt(r.qoq_pct, 'pct') + '</td></tr>'
+  ).join('');
+  return '<h2>' + title + '</h2><table><thead><tr><th>Quarter End</th><th>Value</th>' +
+    '<th>YoY</th><th>QoQ</th></tr></thead><tbody>' + body + '</tbody></table>';
+}
+
+async function lookup() {
+  const ticker = document.getElementById('ticker').value.trim().toUpperCase();
+  if (!ticker) return;
+  document.getElementById('status').textContent = 'Loading ' + ticker + '...';
+  document.getElementById('earnings').innerHTML = '';
+  document.getElementById('eps').innerHTML = '';
+  document.getElementById('revenue').innerHTML = '';
+  document.getElementById('updated').textContent = '';
+  try {
+    const resp = await fetch('./earnings/' + encodeURIComponent(ticker) + '.json', { cache: 'no-store' });
+    if (!resp.ok) {
+      document.getElementById('status').textContent = resp.status === 404
+        ? 'No data found for ' + ticker + ' (not in the tracked universe, or no SEC filings on record).'
+        : 'Error: ' + resp.status;
+      return;
+    }
+    const data = await resp.json();
+    document.getElementById('status').textContent = '';
+    const days = data.days_to_earnings;
+    document.getElementById('earnings').innerHTML = days == null
+      ? 'Next earnings date: unknown'
+      : 'Next earnings: in ' + Math.round(days) + ' day(s)';
+    document.getElementById('eps').innerHTML = table('EPS (diluted, GAAP)', data.eps, 'eps');
+    document.getElementById('revenue').innerHTML = table('Revenue', data.revenue, 'revenue');
+    if (data.exported_at) {
+      document.getElementById('updated').textContent = 'Data refreshed ' + data.exported_at + ' (weekly refresh)';
+    }
+  } catch (e) {
+    document.getElementById('status').textContent = 'Error: ' + e;
+  }
+}
+
+document.getElementById('go').addEventListener('click', lookup);
+document.getElementById('ticker').addEventListener('keydown', e => { if (e.key === 'Enter') lookup(); });
+</script>
+</body>
+</html>
