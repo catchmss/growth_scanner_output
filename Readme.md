@@ -1,0 +1,1 @@
+Growth scanner output
