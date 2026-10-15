@@ -1,3 +1,1 @@
 ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
-WFF,2026-10-12,17.28,40.6,36587600,7661195,4.78,90575995.0,False,,,
-FIGS,2026-10-12,17.74,12.42,11303100,3037950,3.72,41913499.0,False,False,2026-11-05,24.0
