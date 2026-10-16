@@ -1,0 +1,2 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+VXX,2026-10-16,18.38,7.61,44246404,8330370,5.31,143795901.0,False,,,

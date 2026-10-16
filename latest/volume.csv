@@ -1,3 +1,2 @@
 ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
-LQDA,2026-10-14,33.94,26.59,21143400,5391525,3.92,180358440.0,False,False,2026-11-03,20
-CRWV,2026-10-15,69.69,5.94,128884246,35530355,3.63,2900817453.0,False,False,2026-11-11,27
+VXX,2026-10-16,18.38,7.61,44246404,8330370,5.31,143795901.0,False,,,
