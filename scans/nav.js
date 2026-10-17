@@ -43,7 +43,8 @@
   }
   function render(man) {
     var nav = el('nav', 'gs-nav');
-    nav.appendChild(el('a', 'gs-home', '← All scans', '../scans/'));
+    nav.appendChild(el('a', 'gs-home', '← Home', '../'));
+    nav.appendChild(el('a', 'gs-home', 'All scans', '../scans/'));
     if (!man || !man.dates || !man.dates.length) { document.body.insertBefore(nav, document.body.firstChild); return; }
 
     var dates = man.dates, latest = dates[dates.length - 1].date;
