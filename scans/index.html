@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8">
-<title>Scan history</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Scans</title>
 
 <style>
   :root {
@@ -113,58 +114,108 @@
 
 
 <style>
-  .nav-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
+  body { max-width: 1120px; margin: 0 auto; }
+  .site-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+  .site-head h1 { font-size: 24px; letter-spacing: -0.01em; }
+  .site-links { display: flex; gap: 8px; }
   .nav-pill {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    color: var(--ink-primary);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    background: var(--surface-1); border: 1px solid var(--border);
+    color: var(--ink-primary); text-decoration: none; font-size: 12px; font-weight: 600;
   }
   .nav-pill:hover { border-color: var(--ink-muted); }
+  .section-label {
+    color: var(--ink-muted); font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; margin: 0 0 10px;
+  }
+  .latest-date { font-size: 15px; font-weight: 700; margin: 0 0 12px; }
+  .latest-date .tag { margin-left: 8px; vertical-align: 1px; }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 40px; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } body { padding: 20px 16px; } }
+  .card {
+    display: flex; flex-direction: column; gap: 10px;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 18px 16px; color: inherit; text-decoration: none;
+    border-top: 3px solid var(--accent);
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  a.card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.10); }
+  .card-missing { opacity: 0.6; border-top-color: var(--gridline); }
+  .card-title { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 13px; }
+  .card-open { color: var(--ink-muted); font-size: 12px; font-weight: 600; }
+  a.card:hover .card-open { color: var(--ink-primary); }
+  .card-count { display: flex; align-items: baseline; gap: 8px; }
+  .card-count .big { font-size: 38px; font-weight: 750; line-height: 1; font-variant-numeric: tabular-nums; }
+  .card-count .unit { color: var(--ink-secondary); font-size: 13px; }
+  .card-meta { color: var(--ink-secondary); font-size: 12px; min-height: 17px; }
+  .tickers { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 4px; }
+  .tk {
+    font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+    background: var(--track); color: var(--ink-primary); font-variant-numeric: tabular-nums;
+  }
+  .tk small { font-weight: 600; color: var(--ink-muted); margin-left: 4px; }
+  .tk-new { box-shadow: inset 0 0 0 1.5px var(--delta-up); }
+  .tk-dim { color: var(--ink-muted); background: transparent; box-shadow: inset 0 0 0 1px var(--gridline); }
+  .tk-more { color: var(--ink-muted); background: transparent; }
+  .legend-new { color: var(--ink-muted); font-size: 11px; margin: -28px 0 36px; }
+  .legend-new .tk { padding: 1px 6px; }
   .month-group + .month-group { margin-top: 22px; }
-  .month-heading {
-    color: var(--ink-muted);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin: 0 0 8px;
-    padding: 0 14px;
+  .day-row {
+    display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); align-items: center;
+    gap: 10px; padding: 9px 14px; border-bottom: 1px solid var(--gridline);
   }
-  .scan-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--gridline);
+  .day-row:last-child { border-bottom: none; }
+  .day-row:hover { background: color-mix(in srgb, var(--track) 55%, transparent); }
+  .day-head { color: var(--ink-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .day-date { font-weight: 650; font-variant-numeric: tabular-nums; }
+  .day-date .dow { color: var(--ink-muted); font-weight: 600; display: inline-block; width: 34px; }
+  .cell-link {
+    display: inline-flex; align-items: baseline; gap: 6px; padding: 4px 10px; border-radius: 999px;
+    text-decoration: none; color: var(--ink-primary); background: var(--track); font-size: 12px; font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
-  .month-group .panel tr:last-child, .scan-row:last-child { border-bottom: none; }
-  .scan-row:hover { background: var(--track); }
-  .scan-date { color: inherit; text-decoration: none; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .scan-date:hover { color: var(--delta-up); }
-  .scan-row-extra a {
-    color: var(--ink-secondary);
-    text-decoration: none;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 9px;
-    border-radius: 999px;
-    background: var(--track);
+  .cell-link:hover { box-shadow: inset 0 0 0 1.5px var(--accent); }
+  .cell-link .sub { color: var(--ink-muted); font-weight: 600; }
+  .cell-link.zero { color: var(--ink-muted); background: transparent; box-shadow: inset 0 0 0 1px var(--gridline); }
+  .cell-none { color: var(--gridline); font-weight: 700; padding-left: 12px; }
+  .cell-label { display: none; color: var(--ink-muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+  @media (max-width: 640px) {
+    .day-row { grid-template-columns: 1fr 1fr 1fr; }
+    .day-row .day-date { grid-column: 1 / -1; }
+    .day-row.day-header { display: none; }
+    .cell-label { display: block; }
   }
-  .scan-row-extra a:hover { color: var(--ink-primary); }
+  .acc-scan { --accent: #2a78d6; }
+  .acc-volume { --accent: #eb6834; }
+  .acc-ttm { --accent: #0ca30c; }
 </style>
 
 </head>
 <body>
-  <h1>Scan history</h1>
-  <p class="subtitle">27 scans on record</p>
-  <ul class="nav-pills"><li><a class="nav-pill" href="../latest/scan.html">Latest scan</a></li><li><a class="nav-pill" href="../latest/volume.html">Latest volume scan</a></li><li><a class="nav-pill" href="..">Earnings lookup</a></li></ul>
-  <div class="month-group"><h2 class="month-heading">October 2026</h2><div class="panel"><div class="scan-row"><a class="scan-date" href="../2026-10-16/scan.html">2026-10-16</a><span class="scan-row-extra"><a href="../2026-10-16/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-15/scan.html">2026-10-15</a><span class="scan-row-extra"><a href="../2026-10-15/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-14/scan.html">2026-10-14</a><span class="scan-row-extra"><a href="../2026-10-14/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-13/scan.html">2026-10-13</a><span class="scan-row-extra"><a href="../2026-10-13/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-12/scan.html">2026-10-12</a><span class="scan-row-extra"><a href="../2026-10-12/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-09/scan.html">2026-10-09</a><span class="scan-row-extra"><a href="../2026-10-09/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-08/scan.html">2026-10-08</a><span class="scan-row-extra"><a href="../2026-10-08/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-07/scan.html">2026-10-07</a><span class="scan-row-extra"><a href="../2026-10-07/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-06/scan.html">2026-10-06</a><span class="scan-row-extra"><a href="../2026-10-06/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-05/scan.html">2026-10-05</a><span class="scan-row-extra"><a href="../2026-10-05/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-02/scan.html">2026-10-02</a><span class="scan-row-extra"><a href="../2026-10-02/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-10-01/scan.html">2026-10-01</a><span class="scan-row-extra"><a href="../2026-10-01/volume.html">volume</a></span></div></div></div><div class="month-group"><h2 class="month-heading">September 2026</h2><div class="panel"><div class="scan-row"><a class="scan-date" href="../2026-09-30/scan.html">2026-09-30</a><span class="scan-row-extra"><a href="../2026-09-30/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-29/scan.html">2026-09-29</a><span class="scan-row-extra"><a href="../2026-09-29/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-28/scan.html">2026-09-28</a><span class="scan-row-extra"><a href="../2026-09-28/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-25/scan.html">2026-09-25</a><span class="scan-row-extra"><a href="../2026-09-25/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-24/scan.html">2026-09-24</a><span class="scan-row-extra"><a href="../2026-09-24/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-23/scan.html">2026-09-23</a><span class="scan-row-extra"><a href="../2026-09-23/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-22/scan.html">2026-09-22</a><span class="scan-row-extra"><a href="../2026-09-22/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-21/scan.html">2026-09-21</a><span class="scan-row-extra"><a href="../2026-09-21/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-18/scan.html">2026-09-18</a><span class="scan-row-extra"><a href="../2026-09-18/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-17/scan.html">2026-09-17</a><span class="scan-row-extra"><a href="../2026-09-17/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-16/scan.html">2026-09-16</a><span class="scan-row-extra"><a href="../2026-09-16/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-15/scan.html">2026-09-15</a><span class="scan-row-extra"><a href="../2026-09-15/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-14/scan.html">2026-09-14</a><span class="scan-row-extra"><a href="../2026-09-14/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-12/scan.html">2026-09-12</a><span class="scan-row-extra"><a href="../2026-09-12/volume.html">volume</a></span></div><div class="scan-row"><a class="scan-date" href="../2026-09-11/scan.html">2026-09-11</a></div></div></div>
+  <div class="site-head">
+    <div><h1>Daily Scans</h1><p class="subtitle" style="margin:0">28 trading days on record &middot; growth pattern scan, unusual volume and TTM Squeeze, run after each close</p></div>
+    <div class="site-links"><a class="nav-pill" href="..">Earnings lookup</a></div>
+  </div>
+  <p class="section-label">Latest</p>
+  <p class="latest-date">Sat, Oct 17, 2026<span class="badge badge-good tag">most recent</span></p>
+  <div class="cards"><a class="card acc-scan" href="../2026-10-17/scan.html">
+      <div class="card-title">Growth<span class="card-open">Open report &rarr;</span></div>
+      <div class="card-count"><span class="big">2</span><span class="unit">passing</span></div>
+      <div class="card-meta">of 434 pattern matches &middot; 1 breaking out</div>
+      <div class="tickers"><span class="tk">SCCO</span><span class="tk">SLDE</span></div>
+    </a><a class="card acc-volume" href="../2026-10-17/volume.html">
+      <div class="card-title">Volume<span class="card-open">Open report &rarr;</span></div>
+      <div class="card-count"><span class="big">1</span><span class="unit">volume spikes</span></div>
+      <div class="card-meta">biggest: VXX at 5.3&times; avg volume</div>
+      <div class="tickers"><span class="tk">VXX<small>5&times;</small></span></div>
+    </a><a class="card acc-ttm" href="../2026-10-17/ttm.html">
+      <div class="card-title">TTM Squeeze<span class="card-open">Open report &rarr;</span></div>
+      <div class="card-count"><span class="big">23</span><span class="unit">fired</span></div>
+      <div class="card-meta">91 more still in a squeeze</div>
+      <div class="tickers"><span class="tk">CBC</span><span class="tk">ARXS</span><span class="tk">LLY</span><span class="tk">EXEL</span><span class="tk">ORLY</span><span class="tk">AVTR</span><span class="tk">LNG</span><span class="tk">MAS</span><span class="tk">ACGL</span><span class="tk">AMCR</span><span class="tk tk-more">+104 more</span></div>
+    </a></div>
+  <p class="legend-new"><span class="tk tk-new">TICKER</span> new since the previous scan &middot; TTM: solid = fired, outlined = still in a squeeze</p>
+  <p class="section-label" style="margin-top:8px">History</p>
+  <div class="month-group"><p class="section-label">October 2026</p><div class="panel"><div class="day-row day-header"><span class="day-head">Date</span><span class="day-head">Growth</span><span class="day-head">Volume</span><span class="day-head">TTM Squeeze</span></div><div class="day-row"><span class="day-date"><span class="dow">Sat</span>Oct 17</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-17/scan.html">2</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-17/volume.html">1</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><a class="cell-link" href="../2026-10-17/ttm.html">23<span class="sub">+91 on</span></a></span></div><div class="day-row"><span class="day-date"><span class="dow">Fri</span>Oct 16</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-16/scan.html">2</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-16/volume.html">1</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Thu</span>Oct 15</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-15/scan.html">2</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-15/volume.html">2</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Wed</span>Oct 14</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-14/scan.html">7</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link zero" href="../2026-10-14/volume.html">0</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Tue</span>Oct 13</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-13/scan.html">8</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-13/volume.html">2</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Mon</span>Oct 12</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-12/scan.html">8</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-12/volume.html">2</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Fri</span>Oct 9</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-09/scan.html">7</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-09/volume.html">1</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Thu</span>Oct 8</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-08/scan.html">10</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-08/volume.html">1</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Wed</span>Oct 7</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-07/scan.html">8</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-07/volume.html">5</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Tue</span>Oct 6</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-06/scan.html">8</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-06/volume.html">7</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Mon</span>Oct 5</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-05/scan.html">8</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-05/volume.html">9</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Fri</span>Oct 2</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-02/scan.html">9</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-02/volume.html">15</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Thu</span>Oct 1</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-10-01/scan.html">10</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-10-01/volume.html">12</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div></div></div><div class="month-group"><p class="section-label">September 2026</p><div class="panel"><div class="day-row day-header"><span class="day-head">Date</span><span class="day-head">Growth</span><span class="day-head">Volume</span><span class="day-head">TTM Squeeze</span></div><div class="day-row"><span class="day-date"><span class="dow">Wed</span>Sep 30</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-30/scan.html">8</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-30/volume.html">13</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Tue</span>Sep 29</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-29/scan.html">7</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-29/volume.html">12</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Mon</span>Sep 28</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-28/scan.html">9</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-28/volume.html">14</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Fri</span>Sep 25</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-25/scan.html">7</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-25/volume.html">15</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Thu</span>Sep 24</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-24/scan.html">4</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-24/volume.html">14</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Wed</span>Sep 23</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-23/scan.html">4</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-23/volume.html">17</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Tue</span>Sep 22</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-22/scan.html">4</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-22/volume.html">17</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Mon</span>Sep 21</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-21/scan.html">3</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-21/volume.html">30</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Fri</span>Sep 18</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-18/scan.html">3</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-18/volume.html">31</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Thu</span>Sep 17</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-17/scan.html">3</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-17/volume.html">20</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Wed</span>Sep 16</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-16/scan.html">2</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-16/volume.html">12</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Tue</span>Sep 15</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-15/scan.html">2</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-15/volume.html">10</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Mon</span>Sep 14</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-14/scan.html">5</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-14/volume.html">13</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Sat</span>Sep 12</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-12/scan.html">5</a></span><span class="acc-volume"><span class="cell-label">Volume</span><a class="cell-link" href="../2026-09-12/volume.html">13</a></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div><div class="day-row"><span class="day-date"><span class="dow">Fri</span>Sep 11</span><span class="acc-scan"><span class="cell-label">Growth</span><a class="cell-link" href="../2026-09-11/scan.html">5</a></span><span class="acc-volume"><span class="cell-label">Volume</span><span class="cell-none">&mdash;</span></span><span class="acc-ttm"><span class="cell-label">TTM Squeeze</span><span class="cell-none">&mdash;</span></span></div></div></div>
 </body>
 </html>

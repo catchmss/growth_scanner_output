@@ -1,0 +1,200 @@
+{
+ "dates": [
+  {
+   "date": "2026-09-11",
+   "reports": {
+    "scan": "scan.html"
+   }
+  },
+  {
+   "date": "2026-09-12",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-14",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-15",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-16",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-17",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-18",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-21",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-22",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-23",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-24",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-25",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-28",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-29",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-09-30",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-01",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-02",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-05",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-06",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-07",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-08",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-09",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-12",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-13",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-14",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-15",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-16",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html"
+   }
+  },
+  {
+   "date": "2026-10-17",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html",
+    "ttm": "ttm.html"
+   }
+  }
+ ]
+}
