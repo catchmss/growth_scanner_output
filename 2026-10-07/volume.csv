@@ -1,6 +1,0 @@
-ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
-OPCH,2026-10-06,31.0,32.65,65081100,2205295,29.51,52197857.0,False,False,2026-11-04,29
-PENG,2026-10-06,64.21,5.77,15629100,1557870,10.03,84819070.0,False,True,2026-10-06,0
-CEG,2026-10-06,300.4,12.25,13482700,3091985,4.36,821515196.0,False,False,2026-11-09,34
-LW,2026-10-06,47.91,7.49,8376700,1981125,4.23,89418033.0,False,True,2026-10-06,0
-VST,2026-10-06,160.5,10.77,18110600,5520175,3.28,783867867.0,False,False,2026-11-06,31
