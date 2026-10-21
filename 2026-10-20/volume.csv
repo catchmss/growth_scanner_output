@@ -1,0 +1,3 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+SLN,2026-10-19,19.58,125.58,71909500,1091960,65.85,11067542.0,False,False,2026-11-05,17
+CLF,2026-10-19,14.1,16.34,88398600,18102050,4.88,219750638.0,False,True,2026-10-19,0
