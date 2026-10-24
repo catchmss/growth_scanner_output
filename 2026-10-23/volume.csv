@@ -1,0 +1,5 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+BHVN,2026-10-22,14.69,25.02,30510200,1908500,15.99,23265837.0,False,False,2026-11-09,18
+MLTX,2026-10-22,12.34,15.87,6116200,1778385,3.44,19490202.0,False,False,2026-11-05,14
+SPOT,2026-10-22,583.66,11.1,4735300,1464005,3.23,748954159.0,False,True,2026-10-22,0
+CSX,2026-10-22,51.67,6.76,28622500,9205780,3.11,437310194.0,False,True,2026-10-21,1
