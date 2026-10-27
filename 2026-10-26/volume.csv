@@ -1,0 +1,4 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+CART,2026-10-23,56.44,9.21,16087500,3171590,5.07,149476270.0,False,False,2026-11-05,13
+RHI,2026-10-23,45.87,21.74,6894100,1811520,3.81,63700874.0,False,True,2026-10-22,1
+CCI,2026-10-23,85.97,9.06,17322100,4978840,3.48,377206594.0,False,False,2026-10-21,2
