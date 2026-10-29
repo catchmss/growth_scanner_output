@@ -71,6 +71,14 @@
     "volume": "volume.html",
     "ttm": "ttm.html"
    }
+  },
+  {
+   "date": "2026-10-29",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html",
+    "ttm": "ttm.html"
+   }
   }
  ]
 }
