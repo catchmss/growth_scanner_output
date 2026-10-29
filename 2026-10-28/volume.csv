@@ -1,0 +1,4 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+RRC,2026-10-27,56.38,5.27,15954100,3864950,4.13,175276731.0,False,True,2026-10-27,0
+SOFI,2026-10-27,16.4,13.42,160995100,44593505,3.61,674506459.0,False,True,2026-10-27,0
+CLS,2026-10-27,276.54,12.12,8158800,2397450,3.4,769108921.0,False,True,2026-10-26,1
