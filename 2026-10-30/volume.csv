@@ -1,0 +1,5 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+GPN,2026-10-30,96.84,12.97,16725396,1928740,8.67,159701070.0,False,False,2026-11-05,6.0
+GDYN,2026-10-30,13.36,40.78,8557369,1054150,8.12,8925882.0,False,True,2026-10-29,1.0
+CPRI,2026-10-30,18.68,16.31,9807470,3106980,3.16,47866219.0,False,True,2026-10-30,0.0
+VXX,2026-10-30,19.21,10.34,39198695,12682275,3.09,224729741.0,False,,,
