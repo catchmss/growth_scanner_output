@@ -1,0 +1,4 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+CWEN,2026-11-02,33.92,5.9,4246538,1149565,3.69,35438282.0,False,False,2026-11-09,7
+SRAD,2026-11-02,12.86,6.9,5579011,1564245,3.57,19053491.0,False,True,2026-11-03,1
+REPL,2026-11-02,19.48,10.62,7725035,2485295,3.11,34369775.0,False,False,2026-10-28,5
