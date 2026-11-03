@@ -95,6 +95,14 @@
     "volume": "volume.html",
     "ttm": "ttm.html"
    }
+  },
+  {
+   "date": "2026-11-03",
+   "reports": {
+    "scan": "scan.html",
+    "volume": "volume.html",
+    "ttm": "ttm.html"
+   }
   }
  ]
 }
