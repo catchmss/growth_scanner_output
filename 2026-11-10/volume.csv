@@ -1,0 +1,3 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+AAON,2026-11-10,75.01,19.31,5024111,1366150,3.68,92604478.0,False,True,2026-11-09,1
+CSQR,2026-11-10,17.52,14.73,6628461,2127405,3.12,31857887.0,False,True,2026-11-09,1
