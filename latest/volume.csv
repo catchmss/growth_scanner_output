@@ -1,3 +1,4 @@
 ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
-AAON,2026-11-10,75.01,19.31,5024111,1366150,3.68,92604478.0,False,True,2026-11-09,1
-CSQR,2026-11-10,17.52,14.73,6628461,2127405,3.12,31857887.0,False,True,2026-11-09,1
+RSKD,2026-11-11,10.37,22.29,9955721,1627320,6.12,14018086.0,False,True,2026-11-11,0
+REZI,2026-11-11,22.98,18.15,7491771,1441420,5.2,26498070.0,False,True,2026-11-10,1
+SONO,2026-11-11,19.06,12.85,6090694,1366605,4.46,23274498.0,False,True,2026-11-10,1
