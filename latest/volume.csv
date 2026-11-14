@@ -1,2 +1,4 @@
 ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
-LUNR,2026-11-12,13.03,6.98,27756263,7978805,3.48,87214106.0,False,True,2026-11-12,0
+HAWK,2026-11-13,18.16,23.79,6996751,1672150,4.18,22648646.0,False,True,2026-11-12,1
+MOD,2026-11-13,135.66,27.86,8416155,2245285,3.75,260746062.0,False,False,2026-11-03,10
+CBRS,2026-11-13,108.72,11.22,36275400,11213265,3.24,1182470865.0,False,True,2026-11-12,1
