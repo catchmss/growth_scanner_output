@@ -1,0 +1,4 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+SLS,2026-11-17,19.18,156.76,119486326,7645750,15.63,73170697.0,False,False,2026-11-12,5
+BILL,2026-11-17,64.93,12.67,10133538,1523805,6.65,78480259.0,False,False,2026-11-05,12
+ACM,2026-11-17,80.61,11.18,4151010,1314545,3.16,87310530.0,False,True,2026-11-16,1
