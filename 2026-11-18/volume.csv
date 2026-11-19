@@ -1,0 +1,4 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+BRBR,2026-11-18,13.66,24.07,15207435,3572695,4.26,35138617.0,False,True,2026-11-18,0
+BLSH,2026-11-18,20.36,5.66,5194089,1512430,3.43,35698590.0,False,True,2026-11-18,0
+TTWO,2026-11-18,216.61,6.22,11993979,3742210,3.21,789192326.0,False,False,2026-11-09,9
