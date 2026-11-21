@@ -1,0 +1,2 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+GAP,2026-11-20,20.94,11.44,28018446,6903780,4.06,145511529.0,False,True,2026-11-19,1
