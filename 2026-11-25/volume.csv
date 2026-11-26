@@ -1,0 +1,2 @@
+ticker,date,price,pct_change_1d,volume,avg_volume,volume_ratio,avg_dollar_volume,spac_like,near_earnings,nearest_earnings_date,days_from_earnings
+BSP,2026-11-25,46.29,8.0,8443629,2746062,3.07,119191763.0,False,False,2026-11-19,6
